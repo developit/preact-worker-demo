@@ -1,7 +1,6 @@
 
 /** Events that should not be proxied into the Worker's DOM */
 const EVENT_BLACKLIST = 'mousewheel wheel animationstart animationiteration animationend devicemotion deviceorientation deviceorientationabsolute'.split(' ');
-// const EVENT_TYPES = 'click mousedown mouseup mousemove touchstart touchend input change keydown keyup keypress copy paste clear selectstart'.split(' ');
 
 
 /** Options for global addEventListener */
@@ -65,7 +64,7 @@ export default ({ worker }) => {
 				event[i] = v;
 			}
 		}
-		// console.log('event', event);
+
 		worker.postMessage({
 			type: 'event',
 			event
@@ -121,10 +120,6 @@ export default ({ worker }) => {
 				}
 			}
 		}
-		// else {
-		// 	console.warn('Unknown nodeType of '+skel.nodeType);
-		// 	return document.createTextNode('');
-		// }
 		node.__id = skel.__id;
 		NODES.set(skel.__id, node);
 		return node;
@@ -225,30 +220,12 @@ export default ({ worker }) => {
 				if (target && !isElementInViewport(target, cache)) continue;
 			}
 
-			//applyMutation(q[i]);
-
 			// remove mutation from the queue and apply it:
 			applyMutation(q.splice(i--, 1)[0]);
 		}
 
 		// still remaining work to be done
 		if (q.length) doProcessMutationQueue();
-		// if (q.length) setTimeout(doProcessMutationQueue);
-		// if (q.length) requestAnimationFrame(doProcessMutationQueue);
-
-		// if (i<q.length) {
-		// 	MUTATION_QUEUE = q.slice(i);
-		// 	setTimeout(doProcessMutationQueue);
-		// }
-		// else {
-		// 	MUTATION_QUEUE = [];
-		// }
-
-		// let q = MUTATION_QUEUE;
-		// MUTATION_QUEUE = [];
-		// for (let i=0; i<q.length; i++) {
-		// 	applyMutation(q[i]);
-		// }
 	}
 
 
@@ -262,8 +239,6 @@ export default ({ worker }) => {
 
 	// Add a MutationRecord to the queue
 	function queueMutation(mutation) {
-		// if (MUTATION_QUEUE.push(mutation)===1) requestAnimationFrame(processMutationQueue);
-
 		// for single-node updates, merge into pending updates
 		if (mutation.type==='characterData' || mutation.type==='attributes') {
 			for (let i=MUTATION_QUEUE.length; i--; ) {
@@ -282,8 +257,6 @@ export default ({ worker }) => {
 		}
 		if (MUTATION_QUEUE.push(mutation)===1) {
 			doProcessMutationQueue();
-			// requestAnimationFrame(doProcessMutationQueue);
-			// setTimeout(doProcessMutationQueue);
 		}
 	}
 
