@@ -1,17 +1,29 @@
-# Demo: Preact rendering entirely inside a Web Worker
+# A full [Preact] app rendering in a Web Worker [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
 
-![preview](https://i.gyazo.com/065dc08b3f6a93c6a817b424c992abc8.gif)
+Have you ever wondered if you could take advantage of Web Workers to render a Virtual DOM app in a background thread?  This repo contains the source code of a [demo messaging app](https://preact-worker-demo.surge.sh) that does just that! 🌈
 
-[![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
+<a href="https://preact-worker-demo.surge.sh"><img src="http://i.imgur.com/7v881hw.gif" width="204"></a>
 
-> :guitar: Demonstrates [Preact] rendering entirely within a Web Worker.
+
+> ⚡️ A complete [Preact] app running _entirely_ within a Web Worker.
+> 
+> 💁 For a high level overview of the approach, see [How It Works](#how-it-works).
 >
-> :rocket: This means your UI stays interactive at 60FPS, even if your application grinds to a halt in the background.
+> 🚀 This means your UI stays interactive at 60FPS, even if your application grinds to a halt in the background.
 >
 > **[:boom: View Demo :boom:](https://preact-worker-demo.surge.sh)**
 
 
 ---
+
+
+# How It Works
+
+The implementation is split into [renderer/dom.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/dom.js) and [renderer/worker.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/worker.js).  These modules live outside and inside the Worker (respectively), and communicate with eachother asynchronously via `postMessage()`.
+
+The app's code, components, libraries and DOM are all isolated in a single Worker (background thread).  This means even [Preact]'s diff algorithm and component instantiation is done in the worker.  The main (UI) thread simply applies a stream of serialized DOM change descriptions ([MutationRecords]), and proxies events back to the Worker to be handled off the main thread.
+
+As an optimization, when serializing DOM Elements to be published up to the UI thread, any previously-sent Elements are replaced with IDs. These are correlated through a mapping retained on both sides of the thread boundary.
 
 
 # Quick-Start Guide
@@ -79,3 +91,4 @@ MIT
 
 
 [Preact]: https://developit.github.io/preact
+[MutationRecords]: https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord
