@@ -1,17 +1,16 @@
 # A full [Preact] app rendering in a Web Worker [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
 
-<a href="https://preact-worker-demo.surge.sh"><img src="http://i.imgur.com/7v881hw.gif" width="204" align="left"></a>
+<a href="https://preact-worker-demo.surge.sh"><img src="http://i.imgur.com/7v881hw.gif" width="204" align="right"></a>
 
+Have you ever wondered if you could take advantage of Web Workers to render a Virtual DOM app in a background thread? This repo contains the source code of a [demo messaging app](https://preact-worker-demo.surge.sh) that does just that! 🌈
 
-> Have you ever wondered if you could take advantage of Web Workers to render a Virtual DOM app in a background thread?  This repo contains the source code of a [demo messaging app](https://preact-worker-demo.surge.sh) that does just that! 🌈
->
 > ⚡️ A complete [Preact] app running _entirely_ within a Web Worker.
 >
 > 💁 For a high level overview of the approach, see [How It Works](#how-it-works).
 >
 > 🚀 This means your UI stays interactive at 60FPS, even if your application grinds to a halt in the background.
 >
-> **[:boom: View Demo :boom:](https://preact-worker-demo.surge.sh)**
+> ### **[💥 View Demo 💥](https://preact-worker-demo.surge.sh)**
 
 
 ---
