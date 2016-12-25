@@ -1,5 +1,7 @@
 # Demo: Preact rendering entirely inside a Web Worker
 
+![preview](https://i.gyazo.com/065dc08b3f6a93c6a817b424c992abc8.gif)
+
 [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
 
 > :guitar: Demonstrates [Preact] rendering entirely within a Web Worker.
