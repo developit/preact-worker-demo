@@ -1,5 +1,7 @@
 # A full [Preact] app rendering in a Web Worker [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/developit/preact-worker-demo.svg)](https://greenkeeper.io/)
+
 <a href="https://preact-worker-demo.surge.sh"><img src="http://i.imgur.com/7v881hw.gif" width="204" align="right"></a>
 
 Have you ever wondered if you could take advantage of Web Workers to render a Virtual DOM app in a background thread? This repo contains the source code of a [demo messaging app](https://preact-worker-demo.surge.sh) that does just that! 🌈
