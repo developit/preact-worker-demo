@@ -24,8 +24,16 @@ function createManyItems() {
 
 export default class App extends Component {
 	state = {
-		items: createManyItems()
+		items: createManyItems(),
+		message: null,
+		renderDelay: 0
 	};
+
+	timer = setInterval(this.next, 500);
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
 
 	explainWorkerDelay = () => {
 		this.setState({
@@ -49,9 +57,17 @@ export default class App extends Component {
 		this.setState({ items });
 	};
 
+	increaseRenderDelay = () => {
+		this.setState({ renderDelay: Math.min(1024, (this.state.renderDelay || 1) * 2) });
+	};
+
+	decreaseRenderDelay = () => {
+		this.setState({ renderDelay: Math.max(0, (this.state.renderDelay || 1)/2|0) });
+	};
+
 	// start looping after mount
 	componentDidMount() {
-		setTimeout(this.next, 100);
+		setTimeout(this.next, 500);
 	}
 
 	// track render start time before each render
@@ -62,10 +78,13 @@ export default class App extends Component {
 	// after every render, queue another render
 	componentDidUpdate() {
 		this.elapsed = Date.now()-this.started;
-		setTimeout(this.next, 500);
 	}
 
-	render(props, { items, message }) {
+	render(props, { items, message, renderDelay }) {
+		if (renderDelay) {
+			let start = Date.now();
+			while (Date.now()-start < renderDelay) {}
+		}
 		return (
 			<div class="app">
 				<div class="bar bar-header bar-dark">
@@ -91,9 +110,18 @@ export default class App extends Component {
 							</label>
 							Prioritize rendering by visibility
 						</div>
+						<div class="item item-icon-left">
+							<i class="icon ion-clock" />
+							<label for="render-delay">Render Delay:</label>
+							<div style="display: inline-block; margin:-5px 10px 0;">
+								<button class="button button-small button-stable icon-only ion-minus" onClick={this.decreaseRenderDelay} />
+								<strong style="display:inline-block; padding:4px; min-width:3em; text-align:center;">{renderDelay}ms</strong>
+								<button class="button button-small button-stable icon-only ion-plus" onClick={this.increaseRenderDelay} />
+							</div>
+						</div>
 						<div class="item item-icon-left" onClick={this.explainWorkerDelay}>
 							<i class="icon ion-gear-a" />
-							Blocked for {this.elapsed || '...'}ms
+							Blocked for {this.elapsed != null ? this.elapsed : '...'}ms
 						</div>
 						<div class="item item-divider">{items.length} Live Items</div>
 						{ items.map( item => (

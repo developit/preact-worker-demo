@@ -95,7 +95,7 @@ html, body {
 		box-shadow: 0 5px 15px rgba(0,0,0,0.7);
 		border-radius: 3px;
 		transform: translate(-50%, -50%);
-		animation: 250ms jumpIn forwards 1 ease;
+		animation: 500ms jumpIn forwards 1 cubic-bezier(.4,0,.3,1.5);
 	}
 }
 
@@ -106,6 +106,6 @@ html, body {
 @keyframes jumpIn {
 	from {
 		opacity: 0;
-		transform: translate(-50%, -50%) scale3d(.1, .1, .1);
+		transform: translateX(-50%) scale3d(.1, .1, .1);
 	}
 }

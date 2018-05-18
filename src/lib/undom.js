@@ -92,6 +92,7 @@ export default function undom() {
 		set nodeValue(value) {
 			this.textContent = value;
 		}
+		splitText() {}
 	}
 
 
