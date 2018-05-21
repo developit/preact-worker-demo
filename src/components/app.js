@@ -29,8 +29,6 @@ export default class App extends Component {
 		renderDelay: 0
 	};
 
-	timer = setInterval(this.next, 500);
-
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
@@ -67,7 +65,7 @@ export default class App extends Component {
 
 	// start looping after mount
 	componentDidMount() {
-		setTimeout(this.next, 500);
+		this.timer = setInterval(this.next, 500);
 	}
 
 	// track render start time before each render
@@ -83,7 +81,7 @@ export default class App extends Component {
 	render(props, { items, message, renderDelay }) {
 		if (renderDelay) {
 			let start = Date.now();
-			while (Date.now()-start < renderDelay) {}
+			while ((Date.now()-start) < renderDelay) {}
 		}
 		return (
 			<div class="app">
