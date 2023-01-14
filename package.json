@@ -10,11 +10,11 @@
     "preact",
     "worker"
   ],
+  "license": "MIT",
+  "author": "Jason Miller <jason@developit.ca>",
   "devDependencies": {
     "babel-eslint": "^7.0.0",
     "eslint": "^3.0.1",
     "serve": "^14.1.2"
-  },
-  "license": "MIT",
-  "author": "Jason Miller <jason@developit.ca>"
+  }
 }
