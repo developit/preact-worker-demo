@@ -189,9 +189,9 @@ export default ({ worker }) => {
 
 
 	// requestIdleCallback sortof-polyfill
-	if (!global.requestIdleCallback) {
+	if (!globalThis.requestIdleCallback) {
 		const IDLE_TIMEOUT = 10;
-		global.requestIdleCallback = cb => {
+		globalThis.requestIdleCallback = cb => {
 			let start = Date.now();
 			setTimeout( () => cb({
 				timeRemaining: () => Math.max(0, IDLE_TIMEOUT - (Date.now() - start))
