@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Demo of preact rendering an entire app in a Web Worker.",
   "scripts": {
-    "dev": "npx serve src",
+    "dev": "serve src",
     "test": "eslint {src,test}"
   },
   "keywords": [
@@ -12,7 +12,8 @@
   ],
   "devDependencies": {
     "babel-eslint": "^7.0.0",
-    "eslint": "^3.0.1"
+    "eslint": "^3.0.1",
+    "serve": "^14.1.2"
   },
   "license": "MIT",
   "author": "Jason Miller <jason@developit.ca>"
