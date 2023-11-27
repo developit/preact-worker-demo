@@ -18,7 +18,7 @@ Have you ever wondered if you could take advantage of Web Workers to render a Vi
 
 # How It Works
 
-The implementation is split into [renderer/dom.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/dom.js) and [renderer/worker.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/worker.js).  These modules live outside and inside the Worker (respectively), and communicate with eachother asynchronously via `postMessage()`.
+The implementation is split into [renderer/dom.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/dom.mjs) and [renderer/worker.js](https://github.com/developit/preact-worker-demo/blob/master/src/renderer/worker.mjs).  These modules live outside and inside the Worker (respectively), and communicate with eachother asynchronously via `postMessage()`.
 
 The app's code, components, libraries and DOM are all isolated in a single Worker (background thread).  This means even [Preact]'s diff algorithm and component instantiation is done in the worker.  The main (UI) thread simply applies a stream of serialized DOM change descriptions ([MutationRecords]), and proxies events back to the Worker to be handled off the main thread.
 
@@ -54,31 +54,11 @@ npm install
 ## Development Workflow
 
 
-**3. Start a live-reload development server:**
+**3. Start a development server:**
 
 ```sh
-PORT=8080 npm run dev
+npm run dev
 ```
-
-
-**4. Generate a production build in `./build`:**
-
-```sh
-npm run build
-```
-
-> You can now deploy the contents of the `build` directory to production!
->
-> **[Surge.sh](https://surge.sh) Example:** `surge ./build -d my-app.surge.sh`
-
-
-**5. Start local production server with `superstatic`:**
-
-```sh
-npm start
-```
-
-> This is to simulate a production (CDN) server with gzip. It just serves up the contents of `./build`.
 
 
 ---

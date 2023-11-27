@@ -5,7 +5,7 @@ import {
 	findWhere,
 	setImmediate,
 	createAttributeFilter
-} from './util';
+} from './util.mjs';
 
 /*
 const NODE_TYPES = {

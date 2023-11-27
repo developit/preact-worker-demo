@@ -1,5 +1,6 @@
-import { h, Component } from 'preact';
-import Item from './item';
+import { Component } from '../deps/preact.mjs';
+import { html } from '../lib/htm.mjs';
+import Item from './item.mjs';
 
 const ITEM_COUNT = 200;
 const UPDATE_EACH_RENDER = 10;
@@ -66,10 +67,10 @@ export default class App extends Component {
 	}
 
 	render(props, { items, message }) {
-		return (
+		return html`
 			<div class="app">
 				<div class="bar bar-header bar-dark">
-					<button class="button icon ion-information-circled" onClick={this.explainWorkerDelay} />
+					<button class="button icon ion-information-circled" onClick=${this.explainWorkerDelay} />
 					<h1 class="title">
 						Preact in a Worker
 					</h1>
@@ -91,23 +92,23 @@ export default class App extends Component {
 							</label>
 							Prioritize rendering by visibility
 						</div>
-						<div class="item item-icon-left" onClick={this.explainWorkerDelay}>
+						<div class="item item-icon-left" onClick=${this.explainWorkerDelay}>
 							<i class="icon ion-gear-a" />
-							Blocked for {this.elapsed || '...'}ms
+							Blocked for ${this.elapsed || '...'}ms
 						</div>
-						<div class="item item-divider">{items.length} Live Items</div>
-						{ items.map( item => (
-							<Item {...item} />
-						)) }
+						<div class="item item-divider">${items.length} Live Items</div>
+						${ items.map( item => (
+							html`<${Item} ...${item}>footer content here<//>`)
+						)} }
 					</div>
 				</div>
 
-				<div class={'dialog' + (message?' open':'')} onClick={this.closeMessage}>
+				<div class=${'dialog' + (message?' open':'')} onClick=${this.closeMessage}>
 					<div class="inner">
-						{ message || '' }
+						${ message || '' }
 					</div>
 				</div>
 			</div>
-		);
+		`;
 	}
 }

@@ -1,10 +1,10 @@
-import undom from 'undom';
+import undom from '../lib/undom.mjs';
 
 
 // Install a global Document using Undom, a minimal DOM Document implementation.
-let document = global.document = undom();
+let document = globalThis.document = undom();
 for (let i in document.defaultView) if (document.defaultView.hasOwnProperty(i)) {
-	global[i] = document.defaultView[i];
+	globalThis[i] = document.defaultView[i];
 }
 
 
